@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+<title>Sana Nadeem!!! :)</title>
+
+<title>Sana Nadeem</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Sacramento&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+html,body{
+  height:100%;
+  width:100%;
+  overflow:hidden;
+}
+
+body{
+  background:url("img/friend-1.jpg") no-repeat center center/cover;
+  background-size:cover;
+  transition:background-position 0.2s;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* MUSIC BUTTON */
+
+#musicBtn{
+
+  position:fixed;
+  top:20px;
+  right:20px;
+
+  background:rgba(255,255,255,0.2);
+
+  border:none;
+
+  padding:10px 18px;
+
+  border-radius:25px;
+
+  color:white;
+
+  cursor:pointer;
+
+  backdrop-filter:blur(5px);
+
+  box-shadow:0 0 10px rgba(255,255,255,0.3);
+
+  z-index:999;
+
+  transition:0.3s;
+}
+
+#musicBtn:hover{
+
+  transform:scale(1.08);
+
+}
+
+/* OVERLAY */
+
+.overlay{
+
+  position:absolute;
+  inset:0;
+
+  background:linear-gradient(
+    to right,
+    rgba(0,0,0,0.6),
+    rgba(255,0,128,0.4)
+  );
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  color:white;
+  text-align:center;
+
+  opacity:0;
+
+  transition:opacity 2s ease-in-out;
+
+  padding:20px;
+}
+
+/* TEXT */
+
+h1{
+
+  font-family:'Sacramento',cursive;
+
+  font-size:clamp(2rem,5vw,4rem);
+
+  animation:
+  slideDown 2s ease forwards,
+  glow 2s infinite alternate,
+  floatText 3s ease-in-out infinite;
+}
+
+h2{
+
+  font-size:clamp(1.2rem,3vw,2rem);
+
+  margin:15px 0;
+
+  animation:fadeIn 3s ease forwards;
+}
+
+/* ANIMATIONS */
+
+@keyframes glow{
+
+  0%{
+    text-shadow:
+    0 0 5px #fff,
+    0 0 10px #ff4e8a;
+  }
+
+  50%{
+    text-shadow:
+    0 0 20px #fff,
+    0 0 35px #ff1f6d;
+  }
+
+  100%{
+    text-shadow:
+    0 0 5px #fff,
+    0 0 10px #ff4e8a;
+  }
+
+}
+
+@keyframes floatText{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-10px);
+  }
+
+}
+
+@keyframes slideDown{
+
+  from{
+    transform:translateY(-50px);
+    opacity:0;
+  }
+
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+
+}
+
+@keyframes fadeIn{
+
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
+/* PASSWORD BOX */
+
+#passwordContainer{
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  backdrop-filter:blur(10px);
+
+  background:rgba(255,255,255,0.1);
+
+  padding:20px 30px;
+
+  border-radius:20px;
+
+  border:1px solid rgba(255,255,255,0.3);
+
+  box-shadow:0 0 30px rgba(255,255,255,0.2);
+
+  width:clamp(250px,50%,400px);
+
+  transition:0.4s;
+
+  margin-top:40px;
+}
+
+#passwordContainer:hover{
+
+  transform:scale(1.05);
+
+  box-shadow:0 0 45px rgba(255,255,255,0.6);
+}
+
+#passwordInput{
+
+  width:100%;
+
+  padding:12px 20px;
+
+  font-size:clamp(0.9rem,2vw,1.2rem);
+
+  border-radius:15px;
+
+  border:none;
+
+  margin-bottom:15px;
+
+  text-align:center;
+
+  outline:none;
+
+  background:rgba(255,255,255,0.2);
+
+  color:white;
+
+  transition:0.3s;
+}
+
+#passwordInput::placeholder{
+
+  color:white;
+  opacity:0.7;
+}
+
+/* MOBILE ADAPTATIONS (Media Query) */
+@media (max-width: 768px) {
+  html, body {
+    overflow: auto; /* Prevents layout cut-offs when virtual keyboard displays */
+  }
+  
+  #passwordContainer {
+    width: 90%; /* Scales container smoothly on slim portrait views */
+    padding: 20px 15px;
+    margin-top: 20px;
+  }
+
+  /* Disables sticky hover scaling animations on touch interfaces */
+  #musicBtn:hover, #passwordContainer:hover, #submitPassword:hover {
+    transform: none !important;
+  }
+  
+  #musicBtn {
+    top: 15px;
+    right: 15px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+  }
+}
+/* PASSWORD STRENGTH */
+
+.weak{
+  box-shadow:0 0 10px red;
+}
+
+.medium{
+  box-shadow:0 0 15px orange;
+}
+
+.strong{
+  box-shadow:0 0 20px lime;
+}
+
+/* SUBMIT BUTTON */
+
+#submitPassword{
+
+  padding:12px 35px;
+
+  font-size:clamp(1rem,2vw,1.2rem);
+
+  border:none;
+
+  border-radius:30px;
+
+  background:linear-gradient(
+    45deg,
+    #ff4e8a,
+    #ff1f6d
+  );
+
+  color:white;
+
+  cursor:pointer;
+
+  box-shadow:0 0 15px #ff4e8a;
+
+  transition:0.3s;
+}
+
+#submitPassword:hover{
+
+  transform:scale(1.12);
+
+  box-shadow:
+  0 0 25px #ff1f6d,
+  0 0 50px #ff4e8a;
+}
+
+/* ERROR */
+
+#errorMessage{
+
+  color:#ff5555;
+
+  margin-top:10px;
+
+  display:none;
+
+  font-weight:bold;
+}
+
+/* HEARTS */
+
+.heart{
+
+  position:absolute;
+
+  animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+
+  0%{
+    transform:translateY(100vh) scale(0.5);
+    opacity:1;
+  }
+
+  100%{
+    transform:translateY(-10vh) scale(1.2);
+    opacity:0;
+  }
+
+}
+
+/* TRAIL */
+
+.trail{
+
+  position:absolute;
+
+  width:8px;
+  height:8px;
+
+  border-radius:50%;
+
+  background:white;
+
+  pointer-events:none;
+
+  opacity:0.7;
+
+  box-shadow:0 0 10px white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- MUSIC BUTTON -->
+
+<button id="musicBtn">🔇 Music OFF</button>
+
+<!-- OVERLAY -->
+
+<div class="overlay" id="overlay">
+
+<h1>Assalam-o-alaikum 🌸</h1>
+
+<h2>
+Dear <span id="name">Friend</span>
+</h2>
+
+<!-- PASSWORD BOX -->
+
+<div id="passwordContainer">
+
+<input
+type="password"
+id="passwordInput"
+placeholder="Enter Password"
+>
+
+<button id="submitPassword">
+Submit
+</button>
+
+<div id="errorMessage">
+Wrong password! Redirecting...
+</div>
+
+</div>
+
+</div>
+
+<!-- AUDIO -->
+
+<audio id="bgm" loop>
+<source src="music/music.mpeg" type="audio/mp3">
+</audio>
+
+<script>
+
+/* PASSWORD */
+
+const correctPassword = "Sana23/12/2007";
+
+
+const music = document.getElementById("bgm");
+const musicBtn = document.getElementById("musicBtn");
+
+let musicStarted = false;
+
+/* TRY AUTOPLAY ON LOAD */
+window.addEventListener("load", () => {
+  music.volume = 0.7;
+
+  const playPromise = music.play();
+
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => {
+        musicStarted = true;
+        musicBtn.innerText = "🔊 Music ON";
+      })
+      .catch(() => {
+        musicBtn.innerText = "🔇 Music OFF";
+      });
+  }
+});
+
+function autoPlayMusic() {
+  if (musicStarted) return;
+
+  music.volume = 0.7;
+
+  music.play().then(() => {
+    musicBtn.innerText = "🔊 Music ON";
+    musicStarted = true;
+  }).catch(() => {
+      musicBtn.innerText = "🔇 Music OFF";
+  });
+
+  document.removeEventListener("click", autoPlayMusic);
+  document.removeEventListener("mousemove", autoPlayMusic);
+  document.removeEventListener("keydown", autoPlayMusic);
+  document.removeEventListener("touchstart", autoPlayMusic);
+}
+
+/* EVENTS */
+document.addEventListener("click", autoPlayMusic);
+document.addEventListener("mousemove", autoPlayMusic);
+document.addEventListener("keydown", autoPlayMusic);
+document.addEventListener("touchstart", autoPlayMusic);
+
+/* TOGGLE BUTTON (INVERTED LOGIC FIXED) */
+musicBtn.onclick = () => {
+  if (music.paused) {
+    music.play();
+    musicBtn.innerText = "🔊 Music ON";
+  } else {
+    music.pause();
+    musicBtn.innerText = "🔇 Music OFF";
+  }
+}
+setTimeout(()=>{
+
+  document.getElementById("overlay").style.opacity="1";
+
+},1000);
+
+/* MUSIC TOGGLE */
+
+musicBtn.onclick = ()=>{
+
+  if(music.paused){
+
+    music.play();
+    musicBtn.innerText = "🔇 Music OFF"; // now shows OFF while playing
+
+  }
+  else{
+
+    music.pause();
+    musicBtn.innerText = "🔊 Music ON"; // now shows ON while paused
+
+  }
+
+};
+
+/* ENTER KEY */
+
+document
+.getElementById("passwordInput")
+.addEventListener("keypress",e=>{
+
+  if(e.key==="Enter"){
+
+    checkPassword();
+
+  }
+
+});
+
+/* PARALLAX */
+
+document.addEventListener("mousemove",e=>{
+
+  let x =
+  (e.clientX-window.innerWidth/2)/40;
+
+  let y =
+  (e.clientY-window.innerHeight/2)/40;
+
+  document.body.style.backgroundPosition=
+  `calc(50% + ${x}px) calc(50% + ${y}px)`;
+
+});
+
+/* HEARTS */
+
+function createHeart(){
+
+  const heart=document.createElement("div");
+
+  heart.classList.add("heart");
+
+  const emojis=["🌸","❤","💖","💗"];
+
+  heart.innerHTML=
+  emojis[Math.floor(Math.random()*emojis.length)];
+
+  heart.style.left=Math.random()*100+"vw";
+
+  heart.style.fontSize=
+  (Math.random()*25+15)+"px";
+
+  document.body.appendChild(heart);
+
+  setTimeout(()=>{
+
+    heart.remove();
+
+  },6000);
+
+}
+
+setInterval(createHeart,500);
+
+/* MOUSE TRAIL */
+
+document.addEventListener("mousemove",e=>{
+
+  const trail=document.createElement("div");
+
+  trail.classList.add("trail");
+
+  trail.style.left=e.pageX+"px";
+
+  trail.style.top=e.pageY+"px";
+
+  document.body.appendChild(trail);
+
+  setTimeout(()=>{
+
+    trail.remove();
+
+  },600);
+
+});
+
+/* PASSWORD STRENGTH */
+
+const passInput=
+document.getElementById("passwordInput");
+
+passInput.addEventListener("input",()=>{
+
+  let val=passInput.value;
+
+  passInput.classList.remove(
+    "weak",
+    "medium",
+    "strong"
+  );
+
+  if(val.length<4){
+
+    passInput.classList.add("weak");
+
+  }
+  else if(val.length<8){
+
+    passInput.classList.add("medium");
+
+  }
+  else{
+
+    passInput.classList.add("strong");
+
+  }
+
+});
+
+/* NAME TYPE EFFECT */
+
+const nameSpan=
+document.getElementById("name");
+
+const fullName="Sana Nadeem";
+
+let index=0;
+
+function typeWriter(){
+
+  if(index<=fullName.length){
+
+    nameSpan.textContent=
+    fullName.substring(0,index);
+
+    index++;
+
+    setTimeout(typeWriter,150);
+
+  }
+
+}
+
+window.onload=typeWriter;
+
+/* CLICK SPARKLES */
+
+document.addEventListener("click",function(e){
+
+  const count=
+  Math.floor(Math.random()*7+8);
+
+  for(let j=0;j<count;j++){
+
+    const sparkle=
+    document.createElement("div");
+
+    sparkle.style.position="absolute";
+
+    const size=
+    Math.random()*10+6;
+
+    sparkle.style.width=
+    sparkle.style.height=
+    size+"px";
+
+    sparkle.style.background=
+    "radial-gradient(circle, rgba(255,255,200,1) 0%, rgba(255,165,0,0.4) 70%)";
+
+    sparkle.style.borderRadius="50%";
+
+    sparkle.style.left=e.pageX+"px";
+
+    sparkle.style.top=e.pageY+"px";
+
+    sparkle.style.pointerEvents="none";
+
+    sparkle.style.opacity=1;
+
+    document.body.appendChild(sparkle);
+
+    let x=0;
+    let y=0;
+    let life=0;
+
+    const angle=
+    Math.random()*2*Math.PI;
+
+    const speed=
+    Math.random()*4+2;
+
+    function animate(){
+
+      x+=Math.cos(angle)*speed;
+
+      y+=Math.sin(angle)*speed-life*0.05;
+
+      life+=0.5;
+
+      sparkle.style.transform=
+      `translate(${x}px,${-y}px)`;
+
+      sparkle.style.opacity=
+      Math.max(1-life/30,0);
+
+      if(life<30){
+
+        requestAnimationFrame(animate);
+
+      }
+      else{
+
+        sparkle.remove();
+
+      }
+
+    }
+
+    animate();
+
+  }
+
+});
+
+/* PASSWORD CHECK */
+
+document
+.getElementById("submitPassword")
+.onclick=checkPassword;
+
+function checkPassword(){
+
+  const input=
+  document.getElementById("passwordInput").value;
+
+  const errorMsg=
+  document.getElementById("errorMessage");
+
+  if(input===correctPassword){
+
+    window.location.href="first.html";
+
+  }
+  else{
+
+    errorMsg.style.display="block";
+
+    setTimeout(()=>{
+
+      window.location.href=
+      "https://www.google.com";
+
+    },3000);
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
